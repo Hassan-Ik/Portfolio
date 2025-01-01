@@ -4,13 +4,6 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-type ShaderMaterialType = THREE.ShaderMaterial & {
-  uniforms: {
-    u_time: { value: number };
-    [key: string]: any;
-  };
-};
-
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
   opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
@@ -210,19 +203,16 @@ const ShaderMaterial = ({
     }
     lastFrameTime = timestamp;
 
-    const material: ShaderMaterialType = ref.current.material;
+    const material: any = ref.current.material;
     const timeLocation = material.uniforms.u_time;
     timeLocation.value = timestamp;
   });
 
   const getUniforms = () => {
-    const preparedUniforms: Record<string, { value: any; type?: string }> = {};
+    const preparedUniforms: any = {};
 
     for (const uniformName in uniforms) {
-      const uniform = uniforms[uniformName] as {
-        value: number[] | number[][] | number;
-        type: string;
-      };
+      const uniform: any = uniforms[uniformName];
 
       switch (uniform.type) {
         case "uniform1f":
@@ -292,7 +282,7 @@ const ShaderMaterial = ({
   }, [size.width, size.height, source]);
 
   return (
-    <mesh ref={ref as React.RefObject<THREE.Mesh>}>
+    <mesh ref={ref as any}>
       <planeGeometry args={[2, 2]} />
       <primitive object={material} attach="material" />
     </mesh>
