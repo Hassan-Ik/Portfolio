@@ -60,7 +60,7 @@ const Hero = () => {
             Hello! I&apos;m Hassan Ikram, a Full Stack Developer based in Manchester, United Kingdom.
           </p>
 
-          <a href="#about">
+          <a href="#projects">
             <MagicButton
               title="Show my work"
               icon={<FaLocationArrow />}
